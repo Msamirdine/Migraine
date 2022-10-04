@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val Date = findViewById<Button>(R.id.date)
+        val Date = findViewById<Button>(R.id.btndate)
         val SelctDate = findViewById<TextView>(R.id.dateCrise)
 
         val c = Calendar.getInstance()
@@ -26,10 +26,11 @@ class MainActivity : AppCompatActivity() {
 
         Date.setOnClickListener {
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                // Display Selected date in TextView
                 SelctDate.setText("" + dayOfMonth + " / " + month + " / " + year)
             }, year, month, day)
+            dpd.show()
         }
+
 
         val AINS = resources.getStringArray(R.array.itmAINS)
         val TRIPTAN = resources.getStringArray(R.array.itmTRIPTAN)

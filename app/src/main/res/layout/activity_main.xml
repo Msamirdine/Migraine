@@ -57,7 +57,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/date"
+        android:id="@+id/btndate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -75,7 +75,7 @@
         android:text="00/00/0000"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/date"
+        app:layout_constraintStart_toEndOf="@+id/btndate"
         app:layout_constraintTop_toBottomOf="@+id/titre" />
 
     <TextView
@@ -92,7 +92,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date" />
+        app:layout_constraintTop_toBottomOf="@+id/btndate" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
