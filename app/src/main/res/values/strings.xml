@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Migraines</string>
+    <string name="_0_0_0000">0/0/0000</string>
+    <string name="agenda_de_migraine">AGENDA DE MIGRAINE</string>
+    <string name="date_de_la_crise">Date de la crise</string>
+    <string name="intensit">INTENSITÉ</string>
+    <string name="mod_r_e">Modérée</string>
+    <string name="intense">Intense</string>
+    <string name="tr_s_intense">Très intense</string>
+    <string name="les_types_de_medicaments">Les types de medicaments</string>
+
+    <string name="selected_item1">Selected item:</string>
+    <string-array name="itmAINS">
+        <item>CEBUTID</item>
+        <item>SPEDIFEN 400</item>
+        <item>KETUM 100 mg</item>
+        <item>NAPROXÈNE</item>
+    </string-array>
+
+    <string name="selected_item2">Selected item:</string>
+    <string-array name="itmTRIPTAN">
+        <item>IMIGRANE, IMIJECT</item>
+        <item>RELPAX</item>
+        <item>ALMOGRAN</item>
+        <item>ISIMIG, TIGREAT</item>
+        <item>RIZATRIPTAN , MAXALTLYO</item>
+    </string-array>
+
+    <string name="selected_item3">Selected item:</string>
+    <string-array name="itmTDF">
+        <item>NOCERTONE</item>
+        <item>VIDORA </item>
+        <item>PROPRANOLOL</item>
+        <item>LAROXYL</item>
+    </string-array>
+</resources>
