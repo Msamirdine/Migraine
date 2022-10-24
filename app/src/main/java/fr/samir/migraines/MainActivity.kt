@@ -1,12 +1,11 @@
 package fr.samir.migraines
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.ViewParent
 import android.widget.*
-import androidx.annotation.MainThread
 import java.util.*
 
 
@@ -24,9 +23,12 @@ class MainActivity : AppCompatActivity() {
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
+        "Afficher la date acctuel par defaut "
+        SelctDate.setText("$day"+ "/" +  "/" + (month +1) + "/"  + "$year")
+
         Date.setOnClickListener {
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                SelctDate.setText("" + dayOfMonth + " / " + month + " / " + year)
+                SelctDate.setText(""+ dayOfMonth +  "/" + (monthOfYear +1) + "/"  + year)
             }, year, month, day)
             dpd.show()
         }
@@ -83,6 +85,13 @@ class MainActivity : AppCompatActivity() {
                     TODO("Not yet implemented")
                 }
             }
+        }
+        //valid
+        val btnValid = findViewById<Button>(R.id.btnValid)
+        val mon2Activ : Intent =  Intent(this,MainActivity2::class.java)
+
+        btnValid.setOnClickListener {
+            startActivity(mon2Activ)
         }
     }
 }
