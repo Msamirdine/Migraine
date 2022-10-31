@@ -2,17 +2,28 @@ package fr.samir.migraines
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
+import fr.samir.migraines.databinding.ActivityMainBinding
 import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
 
+    //new
+    private lateinit var binding: ActivityMainBinding
+    //new fin
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //new
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        //new fin
+
         setContentView(R.layout.activity_main)
 
         val Date = findViewById<Button>(R.id.btndate)
@@ -23,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
-        "Afficher la date acctuel par defaut "
-        SelctDate.setText("$day"+ "/" +  "/" + (month +1) + "/"  + "$year")
+        "Recup la date acctuel par defaut "
+        SelctDate.setText("$day"+ "/" + (month +1) + "/"  + "$year")
 
         Date.setOnClickListener {
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
@@ -33,7 +44,25 @@ class MainActivity : AppCompatActivity() {
             dpd.show()
         }
 
+        //Gerer les intensités
+        val rg =findViewById<RadioGroup>(R.id.radioGroup)
 
+        rg.setOnCheckedChangeListener{group, isChecked ->
+            if (isChecked == R.id.radioButton_Modérée)
+            Toast.makeText(this,isChecked.toString(),Toast.LENGTH_SHORT).show()
+
+            if (isChecked == R.id.radioButton_intense)
+                Toast.makeText(this,isChecked.toString(),Toast.LENGTH_SHORT).show()
+
+            if (isChecked == R.id.radioButton_TresIntense)
+                Toast.makeText(this,isChecked.toString(),Toast.LENGTH_SHORT).show()
+
+            if (isChecked == R.id.radioButton_insupportable)
+                Toast.makeText(this,isChecked.toString(),Toast.LENGTH_SHORT).show()
+        }
+
+
+        // Gerer les types de medocs
         val AINS = resources.getStringArray(R.array.itmAINS)
         val TRIPTAN = resources.getStringArray(R.array.itmTRIPTAN)
         val TDF = resources.getStringArray(R.array.itmTDF)
@@ -86,12 +115,33 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
         //valid
         val btnValid = findViewById<Button>(R.id.btnValid)
-        val mon2Activ : Intent =  Intent(this,MainActivity2::class.java)
+        //val intent = Intent(this, MainActivity2::class.java)
 
         btnValid.setOnClickListener {
-            startActivity(mon2Activ)
+            //startActivity(intent)
+            callActivity()
+        }
+    }
+    private fun callActivity() {
+        val editDesc = findViewById<EditText>(R.id.desc)
+        val editDate = findViewById<TextView>(R.id.dateCrise)
+        val editAins = findViewById<Spinner>(R.id.spinAins)
+        val editIntens = findViewById<RadioGroup>(R.id.radioGroup)
+
+        val messageDesc = editDesc.text.toString()
+        val messageDate = editDate.text.toString()
+        val messageAins = editAins.onItemSelectedListener.toString()
+        val  messageIntens = editIntens.checkedRadioButtonId.toString()
+
+        val intent = Intent(this, MainActivity2::class.java).also {
+            it.putExtra("EXTRAT_MESSAGE_DESC",messageDesc)
+            it.putExtra("EXTRAT_MESSAGE_DATE",messageDate)
+            it.putExtra("EXTRAT_MESSAGE_SpinAins",messageAins)
+            it.putExtra("EXTRAT_MESSAGE_R_INTENS",messageIntens)
+            startActivity(it)
         }
     }
 }

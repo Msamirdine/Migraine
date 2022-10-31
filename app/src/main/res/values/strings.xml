@@ -27,6 +27,11 @@
     </string-array>
 
     <string name="selected_item3">Selected item:</string>
+    <string name="date_de_crise">Date de crise</string>
+    <string name="text_a">Text_A</string>
+    <string name="text_b">Text_B</string>
+    <string name="text_c">Text_C</string>
+    <string name="text_d">Text_D</string>
     <string-array name="itmTDF">
         <item>NOCERTONE</item>
         <item>VIDORA </item>
