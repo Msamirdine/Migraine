@@ -1,7 +1,6 @@
 package fr.samir.migraines
 
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -24,26 +23,23 @@ class MainActivity : AppCompatActivity() {
         //new fin
         setContentView(R.layout.activity_main)
 
-        // Enregistrer les donnés
-
-
         //date + calendrier
-        val Date = findViewById<Button>(R.id.btndate)
-        val SelctDate = findViewById<TextView>(R.id.dateCrise)
+        val date = findViewById<Button>(R.id.btndate)
+        val selctDate = findViewById<TextView>(R.id.dateCrise)
 
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
         //Recup date acctuel par defaut
-        SelctDate.setText("$day" + "/" + (month + 1) + "/" + "$year")
+        selctDate.setText("$day" + "/" + (month + 1) + "/" + "$year")
         //Fin recup date acctuel
         //Afficher calendrier
-        Date.setOnClickListener {
+        date.setOnClickListener {
             val dpd = DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    SelctDate.setText("" + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year)
+                    selctDate.setText("" + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year)
                 },
                 year,
                 month,
@@ -54,9 +50,9 @@ class MainActivity : AppCompatActivity() {
         // fin date + calendrier
 
         // Gerer les types de medocs
-        val AINS = resources.getStringArray(R.array.itmAINS)
-        val TRIPTAN = resources.getStringArray(R.array.itmTRIPTAN)
-        val TDF = resources.getStringArray(R.array.itmTDF)
+        val ains = resources.getStringArray(R.array.itmAINS)
+        val triptan = resources.getStringArray(R.array.itmTRIPTAN)
+        val tdf = resources.getStringArray(R.array.itmTDF)
         //liste
         val spinAins = findViewById<Spinner>(R.id.spinAins)
         val spinTrip = findViewById<Spinner>(R.id.spinTrip)
@@ -64,12 +60,12 @@ class MainActivity : AppCompatActivity() {
 
         if (spinAins !=null) {
             val adapter = ArrayAdapter(this,
-                android.R.layout.simple_spinner_item, AINS)
+                android.R.layout.simple_spinner_item, ains)
             spinAins.adapter = adapter
             spinAins.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                Toast.makeText(this@MainActivity, AINS[position], Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, ains[position], Toast.LENGTH_SHORT).show()
             }
             override fun onNothingSelected(parent:AdapterView<*>?) {
                 TODO("Not yet implemented")
@@ -78,12 +74,12 @@ class MainActivity : AppCompatActivity() {
         }
         if (spinTrip !=null) {
             val adapter = ArrayAdapter(this,
-                android.R.layout.simple_spinner_item, TRIPTAN)
+                android.R.layout.simple_spinner_item, triptan)
             spinTrip.adapter = adapter
             spinTrip.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                    Toast.makeText(this@MainActivity, TRIPTAN[position], Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, triptan[position], Toast.LENGTH_SHORT).show()
                 }
                 override fun onNothingSelected(parent:AdapterView<*>?) {
                     TODO("Not yet implemented")
@@ -92,12 +88,12 @@ class MainActivity : AppCompatActivity() {
         }
         if (spinTDF !=null) {
             val adapter = ArrayAdapter(this,
-                android.R.layout.simple_spinner_item, TDF)
+                android.R.layout.simple_spinner_item, tdf)
             spinTDF.adapter = adapter
             spinTDF.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                    Toast.makeText(this@MainActivity, AINS[position], Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, ains[position], Toast.LENGTH_SHORT).show()
                 }
                 override fun onNothingSelected(parent:AdapterView<*>?) {
                     TODO("Not yet implemented")
