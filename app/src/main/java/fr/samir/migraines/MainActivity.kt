@@ -1,9 +1,7 @@
 package fr.samir.migraines
 
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -12,16 +10,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import fr.samir.migraines.databinding.ActivityMainBinding
 import java.util.*
 
-//Sauv page "PG" quand on quite l'appli
-const val PREF_DATE ="Date"
-const val PREF_INTENS = "intensité"
-const val PREF_AINS = "ains"
-const val PREF_TRIP = "triptan"
-const val PREF_TDF = "traitement de fond"
-const val PREF_OBSERV = "observation"
-const val  PREF_NAME = "migraine_prefs"
 
 class MainActivity : AppCompatActivity() {
+
     //new
     private lateinit var binding: ActivityMainBinding
     //new fin
@@ -31,8 +22,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         //new fin
         setContentView(R.layout.activity_main)
-        //edit ob
-        val observ = findViewById<EditText>(R.id.desc)
 
         //date + calendrier
         val date = findViewById<Button>(R.id.btndate)
@@ -69,14 +58,10 @@ class MainActivity : AppCompatActivity() {
         val spinTrip = findViewById<Spinner>(R.id.spinTrip)
         val spinTDF = findViewById<Spinner>(R.id.spinTDF)
 
-        /* val ainsPref:SharedPreferences = this.getSharedPreferences("Pref_ains", Context.MODE_PRIVATE)
-        val editor:SharedPreferences.Editor = ainsPref.edit() */
-
         if (spinAins !=null) {
             val adapter = ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, ains)
             spinAins.adapter = adapter
-            val spinnerPosition:Int = adapter.getPosition(PREF_AINS)
             spinAins.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
@@ -85,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent:AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
-            }
+        }
         }
         if (spinTrip !=null) {
             val adapter = ArrayAdapter(this,
@@ -113,12 +98,11 @@ class MainActivity : AppCompatActivity() {
                 override fun onNothingSelected(parent:AdapterView<*>?) {
                     TODO("Not yet implemented")
                 }
-
             }
         }
         //Intensité btn
         val  afficheIntensite = findViewById<TextView>(R.id.txtIntens)
-        afficheIntensite.setText("Aucune")
+        afficheIntensite.setText("Aucun")
         val btnIntense = findViewById<Button>(R.id.btnIntens)
         btnIntense.setOnClickListener {
             intensite()
@@ -128,20 +112,6 @@ class MainActivity : AppCompatActivity() {
         btnValid.setOnClickListener {
             callActivity()
         }
-
-        //Sauvegarder mon activity
-        //Observation
-        val observPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val observPreference = observPreferences?.getString(PREF_OBSERV, "Valeur Par Defaut ")
-        observ.setText(observPreference)
-
-        //Intensité
-        val intensPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val intensPreference = intensPreferences?.getString(PREF_INTENS, "Aucune")
-        afficheIntensite.setText(intensPreference)
-
-        //Ains
-
     }
     //Gérer les intensités
     private lateinit var selectIntense:String
@@ -187,11 +157,6 @@ class MainActivity : AppCompatActivity() {
         val editIntens = findViewById<TextView>(R.id.txtIntens)
         val messageIntens = editIntens.text.toString()
 
-        //Sauvegarder pg
-        val observPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val intensPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val datePreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-
         val intent = Intent(this, MainActivity2::class.java).also {
             it.putExtra("EXTRA_MESSAGE_DESC",messageDesc)
             it.putExtra("EXTRA_MESSAGE_DATE",messageDate)
@@ -201,22 +166,5 @@ class MainActivity : AppCompatActivity() {
             it.putExtra("EXTRA_MESSAGE_R_INTENS",messageIntens)
             startActivity(it)
         }
-
-        //Sauvegarder Pages
-        //Observation
-        if (observPreferences != null) {
-            with (observPreferences.edit()) {
-                putString(PREF_OBSERV, messageDesc)
-                apply()
-            }
-        }
-        //Intensité
-        if (intensPreferences != null) {
-            with (intensPreferences.edit()) {
-                putString(PREF_INTENS, messageIntens)
-                apply()
-            }
-        }
-        //Ains
     }
 }
