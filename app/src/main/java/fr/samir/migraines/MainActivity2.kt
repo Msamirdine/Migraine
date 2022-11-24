@@ -2,9 +2,9 @@ package fr.samir.migraines
 
 //  https://l-art-de-creer-son-application-android.com/comment-gerer-plusieurs-activity-en-kotlin/
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -57,6 +57,6 @@ class MainActivity2 : AppCompatActivity() {
             onBackPressed()
         }
         //Envoyé
-        
+
     }
 }
