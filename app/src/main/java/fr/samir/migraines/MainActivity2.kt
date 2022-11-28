@@ -4,7 +4,6 @@ package fr.samir.migraines
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,8 +14,8 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
         //retour
-        supportActionBar!!.setDefaultDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Retour"
+        //supportActionBar!!.setDefaultDisplayHomeAsUpEnabled(true)
+        //supportActionBar!!.title = "Retour"
 
         //Recup Description
         val messageDesc = intent.getStringExtra("EXTRA_MESSAGE_DESC")
