@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity() {
         //edit ob
         val observ = findViewById<EditText>(R.id.desc)
 
+        //Variable pour save la page
+        val sharedPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+
         //date + calendrier
         val date = findViewById<Button>(R.id.btndate)
         val selctDate = findViewById<TextView>(R.id.dateCrise)
@@ -127,18 +130,18 @@ class MainActivity : AppCompatActivity() {
 
         //Déclaration d'une variable pour Sauvegarder mon activity
         //Observation
-        val observPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val observPreference = observPreferences?.getString(PREF_OBSERV, "Valeur Par Defaut ")
+        // val observPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val observPreference = sharedPreferences?.getString(PREF_OBSERV, "Valeur Par Defaut ")
         observ.setText(observPreference)
 
         //Intensité
-        val intensPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val intensPreference = intensPreferences?.getString(PREF_INTENS, "Aucune")
+        // val intensPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val intensPreference = sharedPreferences?.getString(PREF_INTENS, "Aucune")
         afficheIntensite.setText(intensPreference)
 
         //Ains
-        val ainsPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val ainsPreference = ainsPreferences?.getString(PREF_AINS, "")
+        //val ainsPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val ainsPreference = sharedPreferences?.getString(PREF_AINS, "")
         val adapterAins = ArrayAdapter(this,
             android.R.layout.simple_spinner_dropdown_item, ains)
         spinAins.adapter = adapterAins
@@ -146,8 +149,8 @@ class MainActivity : AppCompatActivity() {
         spinAins.setSelection(spinnerPositionAins)
 
         //Trip
-        val tripPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val tripPreference = tripPreferences?.getString(PREF_TRIP, "")
+        //val tripPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val tripPreference = sharedPreferences?.getString(PREF_TRIP, "")
         val adapterTrip = ArrayAdapter(this,
             android.R.layout.simple_spinner_item, triptan)
         spinTrip.adapter = adapterTrip
@@ -155,8 +158,8 @@ class MainActivity : AppCompatActivity() {
         spinTrip.setSelection(spinnerPositionTrip)
 
         //Tdf
-        val tdfPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val tdfPreference = tdfPreferences?.getString(PREF_TDF, "")
+        //val tdfPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val tdfPreference = sharedPreferences?.getString(PREF_TDF, "")
         val adapterTdf = ArrayAdapter(this,
             android.R.layout.simple_spinner_item, tdf)
         spinTDF.adapter = adapterTdf
@@ -210,13 +213,9 @@ class MainActivity : AppCompatActivity() {
         val editIntens = findViewById<TextView>(R.id.txtIntens)
         val messageIntens = editIntens.text.toString()
 
-        //Variable Sauvegarder pg
-        val observPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val intensPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        //val datePreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val ainsPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val tripPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val tdfPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        //Recuperation de la Variable pour save la page
+        val sharedPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+
 
         val intent = Intent(this, MainActivity2::class.java).also {
             it.putExtra("EXTRA_MESSAGE_DESC",messageDesc)
@@ -229,36 +228,36 @@ class MainActivity : AppCompatActivity() {
         }
         //utilisation d'objet pour Sauvegarder Pages
         //Observation
-        if (observPreferences != null) {
-            with (observPreferences.edit()) {
+        if (sharedPreferences != null) {
+            with (sharedPreferences.edit()) {
                 putString(PREF_OBSERV, messageDesc)
                 apply()
             }
         }
         //Intensité
-        if (intensPreferences != null) {
-            with (intensPreferences.edit()) {
+        if (sharedPreferences != null) {
+            with (sharedPreferences.edit()) {
                 putString(PREF_INTENS, messageIntens)
                 apply()
             }
         }
         //Ains
-        if (ainsPreferences != null) {
-            with (ainsPreferences.edit()) {
+        if (sharedPreferences != null) {
+            with (sharedPreferences.edit()) {
                 putString(PREF_AINS, messageAins)
                 apply()
             }
         }
        //Trip
-        if (tripPreferences != null) {
-            with (tripPreferences.edit()) {
+        if (sharedPreferences != null) {
+            with (sharedPreferences.edit()) {
                 putString(PREF_TRIP, messageTrip)
                 apply()
             }
         }
         //Tdf
-        if (tdfPreferences != null) {
-            with (tdfPreferences.edit()) {
+        if (sharedPreferences != null) {
+            with (sharedPreferences.edit()) {
                 putString(PREF_TDF, messageTdf)
                 apply()
             }
