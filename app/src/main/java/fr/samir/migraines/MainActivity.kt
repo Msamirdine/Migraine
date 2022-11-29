@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     //new
     private lateinit var binding: ActivityMainBinding
     //new fin
+    lateinit var sharedPreferences : SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //new
@@ -36,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         val observ = findViewById<EditText>(R.id.desc)
 
         //Variable pour save la page
-        val sharedPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        sharedPreferences = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)!!
 
         //date + calendrier
         val date = findViewById<Button>(R.id.btndate)
@@ -214,7 +216,7 @@ class MainActivity : AppCompatActivity() {
         val messageIntens = editIntens.text.toString()
 
         //Recuperation de la Variable pour save la page
-        val sharedPreferences : SharedPreferences? = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        sharedPreferences = this?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)!!
 
 
         val intent = Intent(this, MainActivity2::class.java).also {
